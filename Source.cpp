@@ -21,6 +21,7 @@ void Shrink(char szStr[]);		//Удаляет лишние пробелы между словами в предложении
 bool isPalindrome(char szStr[]);	//Проверяет, является ли данная строка палиндромом.
 bool isNumber(char szStr[]);	//Проверяет, является строка числом. Строка является числом, если содержит только цифры.
 bool isHexNumber(char szStr[]);	//Проверяет, является строка шестнадцатеричным числом. Строка является Hex-числом, если содержит только цифры и буквы ABCDEF либо abcdef.
+int StringToInt(char szStr[]);
 
 void main()
 {
@@ -48,10 +49,8 @@ void main()
 	/*Case2007(szStr);*/
 	Capitalized(szStr);
 	//Shrink(szStr);
-	isNumber(szStr);
-	if (isNumber(szStr) == true) cout << "Строка являеться числом" << endl;
-	else cout << "Строка не являеться числом" << endl;
-
+	cout << isNumber(szStr) << endl;
+	cout << StringToInt(szStr) << endl;
 
 }
 
@@ -146,26 +145,36 @@ bool isLowRusLetter(char symbol)
 }
 
 void Shrink(char szStr[])
-{
-	const int n = 30;
-	char szBff[n] = {};
-	LowerCase(szStr);
-
-	for (int i = 0; szStr[i]; i++)
+{	
+	for (int i = 0; szStr[i];)
 	{
-		if (szStr[i] == ' ' && szStr[i - 1] == ' ')
-			szStr++;
 
 	}
-
-	cout << szStr << endl;
 }
 
 bool isNumber(char szStr[])
 {
-	for (int i = 0; szStr; i++)
+	if ((szStr[0] < '0' || szStr[0] > '9') && szStr[0] != '-' && szStr[0] != '+')return false;
+	for (int i = 1; szStr[i]; i++)
 	{
-		if (szStr[i] >= 0 && szStr[i] <= 9)return true;
-		else return false;
+		if (szStr[i] < '0' || szStr[i] > '9') return false;
 	}
+	return true;
+}
+
+int StringToInt(char szStr[])
+{
+	if (isNumber(szStr) == false)return 0;
+	
+
+	int decimal = 0;
+	bool signed_number = false;
+	if (szStr[0] == '+' || szStr[0] == '-')signed_number = true;
+	for (int i = signed_number ? 1 : 0; szStr[i]; i++)
+	{
+		decimal *= 10;
+		decimal += szStr[i]-48;
+	}
+	if (szStr[0] == '-')decimal = -decimal;
+	return decimal;
 }
