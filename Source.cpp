@@ -1,3 +1,4 @@
+п»ї
 #include <iostream>
 #include <Windows.h>
 
@@ -9,20 +10,22 @@ void ASCII()
 }
 
 void InputLine(char szStr[], const int n);
-int StrLen(char szStr[]); // кол во элементов строки 
-void UpperCase(char szStr[]); // переводит строку в верхний регистр
-void LowerCase(char szStr[]); // переводит строку в нижний регистр
+int StrLen(char szStr[]); // ГЄГ®Г« ГўГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г±ГІГ°Г®ГЄГЁ 
+void UpperCase(char szStr[]); // ГЇГҐГ°ГҐГўГ®Г¤ГЁГІ Г±ГІГ°Г®ГЄГі Гў ГўГҐГ°ГµГ­ГЁГ© Г°ГҐГЈГЁГ±ГІГ°
+void LowerCase(char szStr[]); // ГЇГҐГ°ГҐГўГ®Г¤ГЁГІ Г±ГІГ°Г®ГЄГі Гў Г­ГЁГ¦Г­ГЁГ© Г°ГҐГЈГЁГ±ГІГ°
 void Case2007(char szStr[]);
 void Capitalized(char szStr[]);
 bool isLowLetter(char symbol);
 bool isLowRusLetter(char symbol);
 
-void Shrink(char szStr[]);		//Удаляет лишние пробелы между словами в предложении.
-bool isPalindrome(char szStr[]);	//Проверяет, является ли данная строка палиндромом.
-bool isNumber(char szStr[]);	//Проверяет, является строка числом. Строка является числом, если содержит только цифры.
-bool isHexNumber(char szStr[]);	//Проверяет, является строка шестнадцатеричным числом. Строка является Hex-числом, если содержит только цифры и буквы ABCDEF либо abcdef.
+void Shrink(char szStr[]);		//Г“Г¤Г Г«ГїГҐГІ Г«ГЁГёГ­ГЁГҐ ГЇГ°Г®ГЎГҐГ«Г» Г¬ГҐГ¦Г¤Гі Г±Г«Г®ГўГ Г¬ГЁ Гў ГЇГ°ГҐГ¤Г«Г®Г¦ГҐГ­ГЁГЁ.
+bool isPalindrome(char szStr[]);	//ГЏГ°Г®ГўГҐГ°ГїГҐГІ, ГїГўГ«ГїГҐГІГ±Гї Г«ГЁ Г¤Г Г­Г­Г Гї Г±ГІГ°Г®ГЄГ  ГЇГ Г«ГЁГ­Г¤Г°Г®Г¬Г®Г¬.
+bool isNumber(char szStr[]);	//ГЏГ°Г®ГўГҐГ°ГїГҐГІ, ГїГўГ«ГїГҐГІГ±Гї Г±ГІГ°Г®ГЄГ  Г·ГЁГ±Г«Г®Г¬. Г‘ГІГ°Г®ГЄГ  ГїГўГ«ГїГҐГІГ±Гї Г·ГЁГ±Г«Г®Г¬, ГҐГ±Г«ГЁ Г±Г®Г¤ГҐГ°Г¦ГЁГІ ГІГ®Г«ГјГЄГ® Г¶ГЁГґГ°Г».
+bool isHexNumber(char szStr[]);	//ГЏГ°Г®ГўГҐГ°ГїГҐГІ, ГїГўГ«ГїГҐГІГ±Гї Г±ГІГ°Г®ГЄГ  ГёГҐГ±ГІГ­Г Г¤Г¶Г ГІГҐГ°ГЁГ·Г­Г»Г¬ Г·ГЁГ±Г«Г®Г¬. Г‘ГІГ°Г®ГЄГ  ГїГўГ«ГїГҐГІГ±Гї Hex-Г·ГЁГ±Г«Г®Г¬, ГҐГ±Г«ГЁ Г±Г®Г¤ГҐГ°Г¦ГЁГІ ГІГ®Г«ГјГЄГ® Г¶ГЁГґГ°Г» ГЁ ГЎГіГЄГўГ» ABCDEF Г«ГЁГЎГ® abcdef.
 int StringToInt(char szStr[]);
-
+bool isBinNumber(char szStr[]);
+int Bin2Dec(char szStr[]);
+int Hex2Dec(char szStr[]);
 void main()
 {
 
@@ -36,7 +39,7 @@ void main()
 	cout << 'A' - 'a' << endl;*/
 	const int n = 30;
 	char szStr[n] = {};
-	cout << "Введите ник: ";
+	cout << "Р’РІРµРґРёС‚Рµ СЃС‚СЂРѕРєСѓ: ";
 	/*cin >> szStr;*/
 	InputLine(szStr, n);
 	cout << szStr << endl;
@@ -51,6 +54,11 @@ void main()
 	//Shrink(szStr);
 	cout << isNumber(szStr) << endl;
 	cout << StringToInt(szStr) << endl;
+	cout << isHexNumber(szStr) << endl;
+	cout << isPalindrome(szStr) << endl;
+	cout << isBinNumber(szStr) << endl;
+	cout << Bin2Dec(szStr) << endl;
+	cout << Hex2Dec(szStr) << endl;
 
 }
 
@@ -74,7 +82,7 @@ void UpperCase(char szStr[])
 	int i = 0;
 	for (; szStr[i]; i++)
 		if (szStr[i] >= 'a' && szStr[i] <= 'z' ||
-			szStr[i] >= 'а' && szStr[i] <= 'я')
+			szStr[i] >= 'Г ' && szStr[i] <= 'Гї')
 			szStr[i] -= 32;
 }
 
@@ -84,7 +92,7 @@ void LowerCase(char szStr[])
 	int i = 0;
 	for (; szStr[i]; i++)
 		if (szStr[i] >= 'A'&& szStr[i] <= 'Z' ||
-			szStr[i] >= 'А'&& szStr[i] <= 'Я')
+			szStr[i] >= 'ГЂ'&& szStr[i] <= 'Гџ')
 			szStr[i] += 32;
 }
 
@@ -96,14 +104,14 @@ void Case2007(char szStr[])
 		if (i % 2 == 0)
 		{
 			if (szStr[i] >= 'a' && szStr[i] <= 'z' ||
-				szStr[i] >= 'а' && szStr[i] <= 'я')
+				szStr[i] >= 'Г ' && szStr[i] <= 'Гї')
 				szStr[i] -= 32;
 		}
 
 		else
 		{
 			if (szStr[i] >= 'A'&& szStr[i] <= 'Z' ||
-				szStr[i] >= 'А'&& szStr[i] <= 'Я')
+				szStr[i] >= 'ГЂ'&& szStr[i] <= 'Гџ')
 				szStr[i] += 32;
 		}
 		if (szStr[i] == 'a' || szStr[i] == 'A')szStr[i] = '@';
@@ -119,13 +127,13 @@ void Capitalized(char szStr[])
 {
 	LowerCase(szStr);
 	if (szStr[0] >= 'a' && szStr[0] <= 'z' ||
-		szStr[0] >= 'а' && szStr[0] <= 'я')
+		szStr[0] >= 'Г ' && szStr[0] <= 'Гї')
 		szStr[0] -= 32;
 	for (int i = 1; szStr[i]; i++)
 	{
 		if (szStr[i - 1] == ' ' &&
 			(szStr[i] >= 'a' && szStr[i] <= 'z' ||
-				szStr[i] >= 'а' && szStr[i] <= 'я'))
+				szStr[i] >= 'Г ' && szStr[i] <= 'Гї'))
 			szStr[i] -= 32;
 	}
 
@@ -134,7 +142,7 @@ void Capitalized(char szStr[])
 
 bool isLowLetter(char symbol)
 {
-	if (symbol >= 'а' && symbol <= 'я')return true;
+	if (symbol >= 'Г ' && symbol <= 'Гї')return true;
 	else return false;
 }
 
@@ -145,11 +153,18 @@ bool isLowRusLetter(char symbol)
 }
 
 void Shrink(char szStr[])
-{	
-	for (int i = 0; szStr[i];)
+{
+	for (int i = 0; szStr[i];i++)
 	{
-
+		while (szStr[i] == ' ')
+		{
+			for (int j = 0; szStr[j]; j++)
+			{
+				szStr[j] = szStr[j + 1];
+			}
+		}
 	}
+	cout << szStr << endl;
 }
 
 bool isNumber(char szStr[])
@@ -165,7 +180,7 @@ bool isNumber(char szStr[])
 int StringToInt(char szStr[])
 {
 	if (isNumber(szStr) == false)return 0;
-	
+
 
 	int decimal = 0;
 	bool signed_number = false;
@@ -173,8 +188,109 @@ int StringToInt(char szStr[])
 	for (int i = signed_number ? 1 : 0; szStr[i]; i++)
 	{
 		decimal *= 10;
-		decimal += szStr[i]-48;
+		decimal += szStr[i] - 48;
 	}
 	if (szStr[0] == '-')decimal = -decimal;
 	return decimal;
+}
+
+bool isHexNumber(char szStr[])
+{
+	for (int i = 0; szStr[i]; i++)
+	{
+		if (
+			!(szStr[i] >= '0' && szStr[i] <= '9') &&
+			!(szStr[i] >= 'A' && szStr[i] <= 'F') &&
+			!(szStr[i] >= 'a' && szStr[i] <= 'f')
+			)
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool isPalindrome(char szStr[])
+{
+	int size = StrLen(szStr);
+	char* buffer = new char[size + 1]{};
+	for (int i = 0; i < size; i++)buffer[i] = szStr[i];
+	LowerCase(buffer);
+	Shrink(buffer);
+	size = StrLen(buffer);
+	for (int i = 0;i<size/2 ; i++)
+	{
+		if (buffer[i] != buffer[size -i-1])
+		{
+			delete[] buffer;
+			return false;
+		}
+
+	}
+	delete[]buffer;
+	return true;
+
+}
+
+bool isBinNumber(char szStr[])
+{
+	int n = StrLen(szStr);
+	char* buffer = new char[n + 1]{};
+	for (int i = 0; szStr[i]; i++)buffer[i] = szStr[i];
+	Shrink(buffer);
+	
+	for (int i = 0; buffer[i];i++)
+	{
+		if (buffer[i] != '0' && buffer[i] != '1')
+		{
+			delete[]buffer;
+			return false;
+		}
+	}
+	delete[]buffer;
+			return true;
+}
+
+int Bin2Dec(char szStr[])
+{
+	if (!isBinNumber(szStr))
+	{
+		cout << "Error: not binary" << endl;
+		return 0;
+	}
+	
+	int decimal = 0; // РґРµСЃСЏС‚РёС‡РЅРѕРµ С‡РёСЃР»Рѕ
+	int weight = 1; // РІРµСЃРѕРІРѕР№ РєРѕРѕС„РёС†РёРµРЅС‚
+	int capacity = StrLen(szStr);
+	for (int i = capacity-1; i>=0; i--)
+	{
+		if (szStr[i] == ' ') continue;
+		decimal += (szStr[i] - 48)*weight;
+		weight *= 2;
+	}
+	return decimal;
+}
+
+int Hex2Dec(char szStr[])
+{
+	if (!isHexNumber(szStr))
+	{
+		cout << "Error: not heximal" << endl;
+		return 0;
+	}
+
+	int decimal = 0;
+	int weight = 1;
+	int capacity = StrLen(szStr);
+	for (int i = capacity-1; i>=0; i--)
+	{
+		int digit ;
+		if (szStr[i] >= 'a')digit = szStr[i] - 87;
+		else if (szStr[i] >= 'A')digit = szStr[i] - 55;
+		else digit = szStr[i] - 48;
+		decimal += digit*weight;
+		weight *= 16;
+	}
+	return decimal;
+
 }
